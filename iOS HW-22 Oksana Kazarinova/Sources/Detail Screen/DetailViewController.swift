@@ -17,6 +17,18 @@ class DetailViewController: UIViewController {
 
     // MARK: - Outlets
 
+    lazy var editButton: UIBarButtonItem = {
+        let editButton = UIBarButtonItem()
+        editButton.title = "Edit"
+        editButton.style = .plain
+        editButton.customView?.layer.cornerRadius = 5
+        editButton.customView?.layer.borderColor = UIColor.blue.cgColor
+        editButton.customView?.layer.borderWidth = 1.5
+        editButton.target = self
+        editButton.action = #selector(editButtonPressed)
+        return editButton
+    }()
+
     lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
         avatarContainer.contentMode = .scaleToFill
@@ -31,6 +43,7 @@ class DetailViewController: UIViewController {
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
+        imageContainer.image = UIImage(systemName: "person")
         //imageContainer.tintColor = .white
         return imageContainer
     }()
@@ -47,6 +60,7 @@ class DetailViewController: UIViewController {
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
+        imageContainer.image = UIImage(systemName: "calendar")
         //imageContainer.tintColor = .white
         return imageContainer
     }()
@@ -63,6 +77,7 @@ class DetailViewController: UIViewController {
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
+        imageContainer.image = UIImage(systemName: "person.2.circle")
       //  imageContainer.tintColor = .white
         return imageContainer
     }()
@@ -102,7 +117,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupHierarchy()
         setupLayout()
-        setupNavigationBar()
+        navigationItem.rightBarButtonItem = editButton
     }
 
     func setupHierarchy() {
@@ -117,6 +132,7 @@ class DetailViewController: UIViewController {
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
+       // navigationController?.navigationBar.addSubview(editButton)
     }
 
     func setupLayout() {
@@ -162,11 +178,20 @@ class DetailViewController: UIViewController {
         }
     }
 
-    func setupNavigationBar() {
+//    func setupNavigationBar() {
+//
+//        //editButton.customView?.tintColorDidChange()
+//
+//    }
 
+    @objc func editButtonPressed() {
+        editButton.isSelected.toggle()
+        if editButton.isSelected {
+            editButton.title = "Save"
+        } else {
+            editButton.title = "Edit"
+        }
     }
-
-
 
 
 }

@@ -58,8 +58,8 @@ class MainViewController: UIViewController {
         }
 
         addUserButton.snp.makeConstraints { make in
-                make.leading.trailing.equalTo(view).offset(7)
-                make.top.equalTo(textField.snp.bottom).offset(5)
+            make.leading.trailing.equalTo(view).offset(7)
+            make.top.equalTo(textField.snp.bottom).offset(5)
         }
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(addUserButton.snp.bottom).offset(5)
