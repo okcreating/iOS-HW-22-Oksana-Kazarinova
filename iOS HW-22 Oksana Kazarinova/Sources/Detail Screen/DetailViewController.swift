@@ -7,16 +7,18 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, DetailViewProtocol {
 
+    var detailPresenter: DetailPresenterProtocol?
+    
     enum GenderPickerOptions: String {
         case man = "Gentleman"
         case woman = "Lady"
         case notSure = "Other"
     }
-
+    
     // MARK: - Outlets
-
+    
     lazy var editButton: UIBarButtonItem = {
         let editButton = UIBarButtonItem()
         editButton.title = "Edit"
@@ -28,7 +30,7 @@ class DetailViewController: UIViewController {
         editButton.action = #selector(editButtonPressed)
         return editButton
     }()
-
+    
     lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
         avatarContainer.contentMode = .scaleToFill
@@ -37,7 +39,7 @@ class DetailViewController: UIViewController {
         avatarContainer.layer.cornerRadius = 12
         return avatarContainer
     }()
-
+    
     lazy var nameIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
@@ -47,14 +49,14 @@ class DetailViewController: UIViewController {
         //imageContainer.tintColor = .white
         return imageContainer
     }()
-
+    
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
         return label
     }()
-
+    
     lazy var dateIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
@@ -64,24 +66,24 @@ class DetailViewController: UIViewController {
         //imageContainer.tintColor = .white
         return imageContainer
     }()
-
+    
     lazy var dateOfBirthLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
         return label
     }()
-
+    
     lazy var genderIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
         imageContainer.image = UIImage(systemName: "person.2.circle")
-      //  imageContainer.tintColor = .white
+        //  imageContainer.tintColor = .white
         return imageContainer
     }()
-
+    
     lazy var genderLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .regular)
@@ -89,37 +91,37 @@ class DetailViewController: UIViewController {
         label.text = "Gender"
         return label
     }()
-
+    
     lazy var genderPicker: UIPickerView = {
         let picker = UIPickerView()
         return picker
     }()
-
+    
     lazy var nameStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
     }()
-
+    
     lazy var dateStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
     }()
-
+    
     lazy var genderStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupHierarchy()
         setupLayout()
-        navigationItem.rightBarButtonItem = editButton
+        setupNavigationBar()
     }
-
+    
     func setupHierarchy() {
         view.addSubview(avatarContainer)
         nameStack.addSubview(nameIconContainer)
@@ -132,9 +134,9 @@ class DetailViewController: UIViewController {
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
-       // navigationController?.navigationBar.addSubview(editButton)
+        // navigationController?.navigationBar.addSubview(editButton)
     }
-
+    
     func setupLayout() {
         avatarContainer.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(25)
@@ -177,21 +179,15 @@ class DetailViewController: UIViewController {
             make.leading.trailing.equalTo(view).offset(5)
         }
     }
-
-//    func setupNavigationBar() {
-//
-//        //editButton.customView?.tintColorDidChange()
-//
-//    }
-
-    @objc func editButtonPressed() {
-        editButton.isSelected.toggle()
-        if editButton.isSelected {
-            editButton.title = "Save"
-        } else {
-            editButton.title = "Edit"
-        }
+    
+    func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = editButton
+        //editButton.customView?.tintColorDidChange()
     }
-
-
+    
+    @objc func editButtonPressed() {
+        detailPresenter?.changeButtonOutlook()
+        detailPresenter?.updateUserInfoInCoreData()
+    }
 }
+

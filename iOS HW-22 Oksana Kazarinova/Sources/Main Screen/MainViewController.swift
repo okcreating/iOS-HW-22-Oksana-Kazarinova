@@ -8,7 +8,9 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, MainViewProtocol {
+
+    var mainPresenter: MainPresenterProtocol?
 
     // MARK: - Outlets
 
@@ -27,7 +29,7 @@ class MainViewController: UIViewController {
         return textField
     }()
 
-    @objc lazy var addUserButton: UIButton = {
+    lazy var addUserButton: UIButton = {
         let button = UIButton()
         button.setTitle("Add name", for: .normal)
         button.tintColor = .white
@@ -73,7 +75,7 @@ class MainViewController: UIViewController {
     }
 
     @objc func addUser() {
-        //presenter.arrayOfUsers.append(textField.text)
+        mainPresenter?.addUserToCoreData()
     }
 }
 
