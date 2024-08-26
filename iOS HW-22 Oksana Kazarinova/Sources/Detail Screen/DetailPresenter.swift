@@ -19,6 +19,7 @@ protocol DetailPresenterProtocol {
     init(view: DetailViewProtocol, user: User)
     func updateUserInfoInCoreData()
     func changeButtonOutlook()
+    func configurePickerView()
 }
 
 final class DetailViewPresenterProtocol: DetailPresenterProtocol {
@@ -40,6 +41,9 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         } else {
             view.editButton.title = "Edit"
         }
+    }
 
+    func configurePickerView() {
+        
     }
 }

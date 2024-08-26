@@ -16,6 +16,7 @@ protocol MainViewProtocol: AnyObject {
 protocol MainPresenterProtocol {
     init(view: MainViewProtocol, user: User)
     func addUserToCoreData()
+    func configureTableView()
 }
 
 final class MainViewPresenterProtocol: MainPresenterProtocol {
@@ -28,5 +29,9 @@ final class MainViewPresenterProtocol: MainPresenterProtocol {
 
     func addUserToCoreData() {
         <#code#>
+    }
+
+    func configureTableView() {
+
     }
 }

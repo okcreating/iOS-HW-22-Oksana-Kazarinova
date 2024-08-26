@@ -16,6 +16,9 @@ class MainViewController: UIViewController, MainViewProtocol {
 
     lazy var mainTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.register(MainTableViewCell.self, forCellReuseIdentifier: MainTableViewCell.identifier)
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .singleLine
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,6 +29,7 @@ class MainViewController: UIViewController, MainViewProtocol {
         let textField = UITextField()
         textField.placeholder = "Type your name here"
         textField.returnKeyType = .send
+        textField.delegate = self
         return textField
     }()
 
@@ -79,3 +83,42 @@ class MainViewController: UIViewController, MainViewProtocol {
     }
 }
 
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //presenter.
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell
+        else {
+            return UITableViewCell()
+        }
+
+       // let user = mainPresenter.
+        cell.name.text = user?.name
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = ModuleAssembler.createDetailModule(model: )
+       // navigationController?.pushViewController(detailController, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        UITableViewCell.delete
+        mainPresenter.
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        isEditing = true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        isEditing = false
+    }
+}

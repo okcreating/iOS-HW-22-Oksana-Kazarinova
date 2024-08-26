@@ -94,6 +94,8 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     
     lazy var genderPicker: UIPickerView = {
         let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
         return picker
     }()
     
@@ -191,3 +193,26 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     }
 }
 
+extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        3
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return DetailViewController.GenderPickerOptions.man.rawValue
+        }
+        if component == 1 {
+            return DetailViewController.GenderPickerOptions.woman.rawValue
+        }
+        if component == 2 {
+            return DetailViewController.GenderPickerOptions.notSure.rawValue
+        } else {
+            return "Prefer not to say"
+        }
+    }
+}
