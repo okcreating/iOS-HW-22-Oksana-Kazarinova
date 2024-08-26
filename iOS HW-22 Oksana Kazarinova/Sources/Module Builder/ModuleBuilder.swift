@@ -7,7 +7,26 @@
 
 import UIKit
 
-protocol ModulesBuilder {
-    func createMainModule() -> UIViewController
-    func createDetailModule(model: User) -> UIViewController
+protocol ModuleBuilder {
+    static func createMainModule() -> UIViewController
+    static func createDetailModule(model: User) -> UIViewController
 }
+
+class ModuleAssembler: ModuleBuilder {
+    static func createMainModule() -> UIViewController {
+        let view = MainViewController()
+        let user = User()
+        let presenter = MainViewPresenterProtocol(view: view, user: user)
+        view.mainPresenter = presenter
+        return view
+    }
+
+    static func createDetailModule(model: User) -> UIViewController {
+        let user = User()
+        let view = DetailViewController()
+        let presenter = DetailViewPresenterProtocol(view: view, user: user)
+        view.detailPresenter = presenter
+        return view
+    }
+}
+
