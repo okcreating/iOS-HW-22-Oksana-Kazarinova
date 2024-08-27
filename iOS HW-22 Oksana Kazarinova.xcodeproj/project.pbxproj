@@ -17,11 +17,11 @@
 		C65D728F2C7A7AAB000D6AE0 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D728D2C7A7AAB000D6AE0 /* User+CoreDataClass.swift */; };
 		C65D72902C7A7AAB000D6AE0 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D728E2C7A7AAB000D6AE0 /* User+CoreDataProperties.swift */; };
 		C65D72922C7A7C17000D6AE0 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72912C7A7C17000D6AE0 /* ModuleBuilder.swift */; };
-		C65D72962C7A7EF7000D6AE0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72952C7A7EF7000D6AE0 /* CoreDataManager.swift */; };
 		C65D72982C7A7FB5000D6AE0 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72972C7A7FB5000D6AE0 /* MainTableViewCell.swift */; };
 		C65D729A2C7A80E6000D6AE0 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72992C7A80E6000D6AE0 /* MainPresenter.swift */; };
 		C65D729C2C7A8104000D6AE0 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D729B2C7A8104000D6AE0 /* DetailPresenter.swift */; };
 		C65D729E2C7A81F4000D6AE0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D729D2C7A81F4000D6AE0 /* DetailViewController.swift */; };
+		C65F07392C7E097B0096DC6F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65F07382C7E097B0096DC6F /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,11 +36,11 @@
 		C65D728D2C7A7AAB000D6AE0 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C65D728E2C7A7AAB000D6AE0 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C65D72912C7A7C17000D6AE0 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
-		C65D72952C7A7EF7000D6AE0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C65D72972C7A7FB5000D6AE0 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		C65D72992C7A80E6000D6AE0 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		C65D729B2C7A8104000D6AE0 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		C65D729D2C7A81F4000D6AE0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C65F07382C7E097B0096DC6F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 		C65D72832C7A667B000D6AE0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C65D72942C7A7EB9000D6AE0 /* CoreDataManager */,
+				C65F07372C7E09080096DC6F /* CoreDataManager */,
 				C65D72892C7A6838000D6AE0 /* Module Builder */,
 				C65D72842C7A6698000D6AE0 /* Model */,
 				C65D72872C7A6711000D6AE0 /* Main Screen */,
@@ -157,12 +157,13 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		C65D72942C7A7EB9000D6AE0 /* CoreDataManager */ = {
+		C65F07372C7E09080096DC6F /* CoreDataManager */ = {
 			isa = PBXGroup;
 			children = (
-				C65D72952C7A7EF7000D6AE0 /* CoreDataManager.swift */,
+				C65F07382C7E097B0096DC6F /* CoreDataManager.swift */,
 			);
-			path = CoreDataManager;
+			name = CoreDataManager;
+			path = "Module Builder/CoreDataManager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,10 +249,10 @@
 				C65D728F2C7A7AAB000D6AE0 /* User+CoreDataClass.swift in Sources */,
 				C65D729C2C7A8104000D6AE0 /* DetailPresenter.swift in Sources */,
 				C65D72902C7A7AAB000D6AE0 /* User+CoreDataProperties.swift in Sources */,
+				C65F07392C7E097B0096DC6F /* CoreDataManager.swift in Sources */,
 				C65D729A2C7A80E6000D6AE0 /* MainPresenter.swift in Sources */,
 				C65D72922C7A7C17000D6AE0 /* ModuleBuilder.swift in Sources */,
 				C65D72702C7A631C000D6AE0 /* SceneDelegate.swift in Sources */,
-				C65D72962C7A7EF7000D6AE0 /* CoreDataManager.swift in Sources */,
 				C65D728C2C7A695D000D6AE0 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

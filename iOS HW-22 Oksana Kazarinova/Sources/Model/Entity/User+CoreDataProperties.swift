@@ -17,8 +17,8 @@ extension User {
     }
 
     @NSManaged public var photo: Data?
-    @NSManaged public var name: String?
-    @NSManaged public var dateOfBirth: String?
+    @NSManaged public var name: String
+    @NSManaged public var dateOfBirth: Date?
     @NSManaged public var gender: String?
 
 }

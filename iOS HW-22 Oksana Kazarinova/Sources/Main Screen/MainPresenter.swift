@@ -15,11 +15,15 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainPresenterProtocol {
     init(view: MainViewProtocol, user: User)
-    func addUserToCoreData()
-    func configureTableView()
+    func addUser()
+    func countUsers() -> Int
+    func getUserByIndex(at index: Int) -> User?
+    func deleteUser(user: User)
 }
 
 final class MainViewPresenterProtocol: MainPresenterProtocol {
+
+    
     let view: MainViewProtocol
     let user: User
     init(view: any MainViewProtocol, user: User) {
@@ -27,11 +31,19 @@ final class MainViewPresenterProtocol: MainPresenterProtocol {
         self.user = user
     }
 
-    func addUserToCoreData() {
-        <#code#>
+    func addUser() {
+        CoreDataManager.shared.addUser(name: <#T##String#>, dateOfBirth: ., gender: DetailViewController.GenderPickerOptions.man.rawValue )
     }
 
-    func configureTableView() {
+    func countUsers() -> Int {
+        CoreDataManager.shared.allUsers?.count ?? 0
+    }
 
+    func getUserByIndex(at index: Int) -> User? {
+        CoreDataManager.shared.allUsers?[index]
+    }
+
+    func deleteUser(user: User) {
+        CoreDataManager.shared.deleteUser(user: user)
     }
 }

@@ -10,7 +10,8 @@ import UIKit
 class DetailViewController: UIViewController, DetailViewProtocol {
 
     var detailPresenter: DetailPresenterProtocol?
-    
+    var coreDataManager = CoreDataManager.shared
+
     enum GenderPickerOptions: String {
         case man = "Gentleman"
         case woman = "Lady"

@@ -79,13 +79,13 @@ class MainViewController: UIViewController, MainViewProtocol {
     }
 
     @objc func addUser() {
-        mainPresenter?.addUserToCoreData()
+        mainPresenter?.addUser()
     }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //presenter.
+        mainPresenter?.countUsers() ?? 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,18 +98,19 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
 
-       // let user = mainPresenter.
+        let user = mainPresenter?.getUserByIndex(at: indexPath.row)
         cell.name.text = user?.name
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = ModuleAssembler.createDetailModule(model: )
+        let detailController = ModuleAssembler.createDetailModule()
        // navigationController?.pushViewController(detailController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        UITableViewCell.delete
-        mainPresenter.
+        UITableViewCell.EditingStyle.delete
+        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return }
+        mainPresenter?.deleteUser(user: user)
     }
 }
 

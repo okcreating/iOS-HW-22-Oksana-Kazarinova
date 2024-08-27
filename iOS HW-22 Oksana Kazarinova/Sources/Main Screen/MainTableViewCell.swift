@@ -14,7 +14,7 @@ class MainTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
 
-    private lazy var name: UILabel = {
+    lazy var name: UILabel = {
         let name = UILabel()
         name.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return name
@@ -25,6 +25,7 @@ class MainTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: MainTableViewCell.identifier)
         selectionStyle = .blue
+        accessoryType = .disclosureIndicator
         setupHierarchy()
         setupLayout()
     }
