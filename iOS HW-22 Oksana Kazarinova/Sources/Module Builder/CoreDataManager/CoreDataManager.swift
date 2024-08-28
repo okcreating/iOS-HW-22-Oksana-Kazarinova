@@ -41,22 +41,18 @@ final  class CoreDataManager {
         }
     }
 
-    func fetchAllUsers() -> [User] {
+    func fetchAllUsers()  {
         let fetchRequest: NSFetchRequest = User.fetchRequest()
         do {
-            let users = try objectContext.fetch(fetchRequest)
-            return users
+            allUsers = try objectContext.fetch(fetchRequest)
         } catch {
             print("Fetching failed: \(error.localizedDescription)")
-            return []
         }
     }
 
-    func addUser(name: String, dateOfBirth: String?, gender: String?) {
+    func addUser(name: String) {
         let newUser = User(context: objectContext)
         newUser.name = name
-        newUser.dateOfBirth = dateOfBirth
-        newUser.gender = gender
         saveData()
 //        do {
 //            try objectContext.save()
@@ -64,7 +60,16 @@ final  class CoreDataManager {
 //            objectContext.rollback()
 //            print("Adding new user error: \(error.localizedDescription)")
 //        }
-        allUsers = fetchAllUsers()
+        //allUsers = fetchAllUsers()
+    }
+
+    func updateUser(userToUpdate: User, photo: Data?, name: String, dateOfBirth: Date?, gender: String?) {
+        userToUpdate.name = name
+        userToUpdate.photo = photo
+        userToUpdate.dateOfBirth = dateOfBirth
+        userToUpdate.gender = gender
+        saveData()
+       // allUsers = fetchAllUsers()
     }
 
     func deleteUser(user: User) {
@@ -76,7 +81,7 @@ final  class CoreDataManager {
 //            objectContext.rollback()
 //            print("Deleting user error: \(error.localizedDescription)")
 //        }
-        allUsers = fetchAllUsers()
+      //  allUsers = fetchAllUsers()
     }
 }
 

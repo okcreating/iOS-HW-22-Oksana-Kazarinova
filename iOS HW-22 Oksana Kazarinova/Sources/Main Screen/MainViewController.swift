@@ -49,6 +49,7 @@ class MainViewController: UIViewController, MainViewProtocol {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
+        mainPresenter?.fetchUsers()
     }
 
     func setupHierarchy() {
@@ -78,8 +79,14 @@ class MainViewController: UIViewController, MainViewProtocol {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
+    func reloadTableView() {
+        mainTableView.reloadData()
+    }
+
     @objc func addUser() {
-        mainPresenter?.addUser()
+        if textField.text != "" {
+            mainPresenter?.addUser(name: textField.text ?? "")
+        }
     }
 }
 
@@ -104,13 +111,13 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailController = ModuleAssembler.createDetailModule()
-       // navigationController?.pushViewController(detailController, animated: true)
+         navigationController?.pushViewController(detailController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        UITableViewCell.EditingStyle.delete
-        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return }
+        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return .none }
         mainPresenter?.deleteUser(user: user)
+        return .delete
     }
 }
 
