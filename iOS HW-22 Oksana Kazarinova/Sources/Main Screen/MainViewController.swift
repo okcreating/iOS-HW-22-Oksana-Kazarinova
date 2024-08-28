@@ -49,6 +49,7 @@ class MainViewController: UIViewController, MainViewProtocol {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
+        mainPresenter?.fetchUsers()
     }
 
     func setupHierarchy() {
@@ -78,14 +79,20 @@ class MainViewController: UIViewController, MainViewProtocol {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
+    func reloadTableView() {
+        mainTableView.reloadData()
+    }
+
     @objc func addUser() {
-        mainPresenter?.addUserToCoreData()
+        if textField.text != "" {
+            mainPresenter?.addUser(name: textField.text ?? "")
+        }
     }
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //presenter.
+        mainPresenter?.countUsers() ?? 0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,18 +105,19 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
 
-       // let user = mainPresenter.
+        let user = mainPresenter?.getUserByIndex(at: indexPath.row)
         cell.name.text = user?.name
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = ModuleAssembler.createDetailModule(model: )
-       // navigationController?.pushViewController(detailController, animated: true)
+        let detailController = ModuleAssembler.createDetailModule()
+         navigationController?.pushViewController(detailController, animated: true)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        UITableViewCell.delete
-        mainPresenter.
+        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return .none }
+        mainPresenter?.deleteUser(user: user)
+        return .delete
     }
 }
 

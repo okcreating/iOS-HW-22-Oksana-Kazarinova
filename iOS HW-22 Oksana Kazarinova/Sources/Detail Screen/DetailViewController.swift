@@ -10,7 +10,7 @@ import UIKit
 class DetailViewController: UIViewController, DetailViewProtocol {
 
     var detailPresenter: DetailPresenterProtocol?
-    
+
     enum GenderPickerOptions: String {
         case man = "Gentleman"
         case woman = "Lady"
@@ -189,7 +189,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     
     @objc func editButtonPressed() {
         detailPresenter?.changeButtonOutlook()
-        detailPresenter?.updateUserInfoInCoreData()
+        detailPresenter?.updateUserInfo()
     }
 }
 
@@ -214,5 +214,8 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         } else {
             return "Prefer not to say"
         }
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        <#code#>
     }
 }

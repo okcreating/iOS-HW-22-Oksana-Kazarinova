@@ -17,21 +17,21 @@ protocol DetailViewProtocol: AnyObject {
 
 protocol DetailPresenterProtocol {
     init(view: DetailViewProtocol, user: User)
-    func updateUserInfoInCoreData()
+    func updateUserInfo()
     func changeButtonOutlook()
-    func configurePickerView()
+
 }
 
 final class DetailViewPresenterProtocol: DetailPresenterProtocol {
     let view: DetailViewProtocol
-    let user: User
+    let user: User?
     init(view: any DetailViewProtocol, user: User) {
         self.view = view
         self.user = user
     }
 
-    func updateUserInfoInCoreData() {
-        <#code#>
+    func updateUserInfo() {
+        CoreDataManager.shared.updateUser(userToUpdate: <#T##User#>, photo: <#T##Data?#>, name: <#T##String#>, dateOfBirth: <#T##Date?#>, gender: <#T##String?#>)
     }
 
     func changeButtonOutlook() {
@@ -43,7 +43,5 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         }
     }
 
-    func configurePickerView() {
-        
-    }
+
 }
