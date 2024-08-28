@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailViewController: UIViewController, DetailViewProtocol {
-
+    
     var detailPresenter: DetailPresenterProtocol?
 
     enum GenderPickerOptions: String {
@@ -50,10 +51,11 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var nameLabel: UILabel = {
-        let label = UILabel()
+    lazy var nameLabel: UITextField = {
+        let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -67,10 +69,13 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var dateOfBirthLabel: UILabel = {
-        let label = UILabel()
+    lazy var dateOfBirthLabel: UITextField = {
+        let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
+        label.placeholder = "dd/mm/yyy"
+        label.isUserInteractionEnabled = false
+        label.delegate = self
         return label
     }()
     
@@ -96,6 +101,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
+        picker.isUserInteractionEnabled = false
         return picker
     }()
     
@@ -122,6 +128,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
+        configureView()
     }
     
     func setupHierarchy() {
@@ -186,10 +193,33 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         navigationItem.rightBarButtonItem = editButton
         //editButton.customView?.tintColorDidChange()
     }
-    
+
+    func configureView() {
+        let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
+        avatarContainer.kf.setImage(with: imageURL)
+        detailPresenter.
+    }
+
     @objc func editButtonPressed() {
-        detailPresenter?.changeButtonOutlook()
-        detailPresenter?.updateUserInfo()
+        func changeButtonOutlook() {
+            editButton.isSelected.toggle()
+            if editButton.isSelected {
+                editButton.title = "Save"
+                editButton.customView?.layer.borderColor = UIColor.green.cgColor
+                nameLabel.isUserInteractionEnabled = true
+                dateOfBirthLabel.isUserInteractionEnabled = true
+                genderPicker.isUserInteractionEnabled = true
+            } else {
+                editButton.title = "Edit"
+                editButton.customView?.layer.borderColor = UIColor.blue.cgColor
+                nameLabel.isUserInteractionEnabled = false
+                dateOfBirthLabel.isUserInteractionEnabled = false
+                genderPicker.isUserInteractionEnabled = false
+
+
+                detailPresenter?.updateUserInfo(userToUpdate: <#User#>, photo: avatarContainer.image, name: nameLabel.text ?? "Name deleted", dateOfBirth: dateOfBirthLabel.text, gender: genderPicker.selectedRow(inComponent: <#T##Int#>))
+            }
+        }
     }
 }
 
@@ -215,7 +245,37 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             return "Prefer not to say"
         }
     }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        <#code#>
+
+//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if component == 0 {
+//            genderPicker.
+//        }
+//        if component == 1 {
+//            return DetailViewController.GenderPickerOptions.woman.rawValue
+//        }
+//        if component == 2 {
+//            return DetailViewController.GenderPickerOptions.notSure.rawValue
+//        } else {
+//            return "Prefer not to say"
+//        }
+//    }
+
     }
-}
+
+
+extension DetailViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == dateOfBirthLabel {
+            if (dateOfBirthLabel.text?.count == 2) || (dateOfBirthLabel.text?.count == 5) {
+                        if !(string == "") {
+                            dateOfBirthLabel.text = (dateOfBirthLabel.text)! + "-"
+                        }
+                    }
+                    return !(textField.text!.count > 9 && (string.count ) > range.length)
+                }
+                else {
+                    return true
+                }
+            }
+        }
+

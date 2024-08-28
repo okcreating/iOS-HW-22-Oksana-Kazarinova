@@ -63,7 +63,7 @@ final  class CoreDataManager {
         //allUsers = fetchAllUsers()
     }
 
-    func updateUser(userToUpdate: User, photo: Data?, name: String, dateOfBirth: Date?, gender: String?) {
+    func updateUser(userToUpdate: User, photo: Data?, name: String, dateOfBirth: String?, gender: String?) {
         userToUpdate.name = name
         userToUpdate.photo = photo
         userToUpdate.dateOfBirth = dateOfBirth
