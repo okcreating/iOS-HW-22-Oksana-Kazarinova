@@ -8,6 +8,7 @@
 import Foundation
 
 protocol DetailViewProtocol: AnyObject {
+    var user: User? { get set }
     func setupHierarchy()
     func setupLayout()
     func setupNavigationBar()
@@ -15,8 +16,9 @@ protocol DetailViewProtocol: AnyObject {
 }
 
 protocol DetailPresenterProtocol {
-    init(view: DetailViewProtocol, user: User)
-    func updateUserInfo(userToUpdate: User, photo: Data?, name: String, dateOfBirth: String?, gender: String?)
+    //init(view: DetailViewProtocol, user: User)
+    func setChosenUser()
+    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?)
 
 }
 
@@ -28,7 +30,14 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         self.user = user
     }
 
-    func updateUserInfo(userToUpdate: User, photo: Data?, name: String, dateOfBirth: String?, gender: String?) {
-        CoreDataManager.shared.updateUser(userToUpdate: userToUpdate, photo: photo, name: name, dateOfBirth: dateOfBirth, gender: gender)
+    func setChosenUser() {
+        view.user = user
+    }
+
+    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?) {
+        user?.name = name
+        user?.dateOfBirth = dateOfBirth
+        user?.gender = gender
+        CoreDataManager.shared.updateUser()
     }
 }

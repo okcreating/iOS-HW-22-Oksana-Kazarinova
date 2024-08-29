@@ -197,7 +197,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     func configureView() {
         let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
         avatarContainer.kf.setImage(with: imageURL)
-        detailPresenter.
+        
     }
 
     @objc func editButtonPressed() {
@@ -217,7 +217,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
                 genderPicker.isUserInteractionEnabled = false
 
 
-                detailPresenter?.updateUserInfo(userToUpdate: <#User#>, photo: avatarContainer.image, name: nameLabel.text ?? "Name deleted", dateOfBirth: dateOfBirthLabel.text, gender: genderPicker.selectedRow(inComponent: <#T##Int#>))
+                detailPresenter?.updateUserInfo(name: nameLabel.text ?? "Name deleted", dateOfBirth: dateOfBirthLabel.text, gender: genderPicker.selectedRow(inComponent:))
             }
         }
     }
@@ -261,7 +261,6 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 //    }
 
     }
-
 
 extension DetailViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

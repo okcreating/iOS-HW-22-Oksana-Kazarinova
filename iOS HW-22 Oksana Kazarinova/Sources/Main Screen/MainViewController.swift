@@ -110,7 +110,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = ModuleAssembler.createDetailModule()
+        let detailController = ModuleAssembler.createDetailModule() as? DetailViewController ?? UIViewController()
+        detailController.
          navigationController?.pushViewController(detailController, animated: true)
     }
 
