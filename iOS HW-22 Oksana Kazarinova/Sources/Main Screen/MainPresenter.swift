@@ -16,7 +16,7 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainPresenterProtocol {
     init(view: MainViewProtocol, user: User)
-    func addUser(name: String)
+    func addUser(name: String, dateOfBirth: String?, gender: String?, photo: String?)
     func countUsers() -> Int
     func getUserByIndex(at index: Int) -> User?
     func deleteUser(user: User)
@@ -32,17 +32,17 @@ final class MainViewPresenterProtocol: MainPresenterProtocol {
         self.user = user
     }
 
-    func addUser(name: String) {
-        CoreDataManager.shared.addUser(name: name)
+    func addUser(name: String, dateOfBirth: String?, gender: String?, photo: String?) {
+        CoreDataManager.shared.addUser(name: name, dateOfBirth: dateOfBirth, gender: gender, photo: photo)
         view.reloadTableView()
     }
 
     func countUsers() -> Int {
-        CoreDataManager.shared.allUsers?.count ?? 0
+        CoreDataManager.shared.allUsers.count 
     }
 
     func getUserByIndex(at index: Int) -> User? {
-        CoreDataManager.shared.allUsers?[index]
+        CoreDataManager.shared.allUsers[index]
     }
 
     func deleteUser(user: User) {

@@ -16,9 +16,10 @@ extension User {
         return NSFetchRequest<User>(entityName: "User")
     }
 
-    @NSManaged public var name: String
+    @NSManaged public var name: String?
     @NSManaged public var dateOfBirth: String?
     @NSManaged public var gender: String?
+    @NSManaged public var photo: String?
 }
 
 extension User : Identifiable {

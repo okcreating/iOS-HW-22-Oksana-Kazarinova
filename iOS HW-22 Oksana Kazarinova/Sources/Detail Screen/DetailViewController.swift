@@ -9,8 +9,11 @@ import UIKit
 import Kingfisher
 
 class DetailViewController: UIViewController, DetailViewProtocol {
+    var user: User?
     
     var detailPresenter: DetailPresenterProtocol?
+
+    var chosenGenderPickerOption: GenderPickerOptions.RawValue?
 
     enum GenderPickerOptions: String {
         case man = "Gentleman"
@@ -34,10 +37,12 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     
     lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
-        avatarContainer.contentMode = .scaleToFill
+        avatarContainer.contentMode = .scaleAspectFill
         avatarContainer.layer.masksToBounds = true
         avatarContainer.clipsToBounds = true
         avatarContainer.layer.cornerRadius = 12
+        avatarContainer.frame.size.width = 80
+        avatarContainer.frame.size.height = 80
         return avatarContainer
     }()
     
@@ -55,6 +60,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
+        label.returnKeyType = .done
         label.isUserInteractionEnabled = false
         return label
     }()
@@ -101,6 +107,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
+        picker.sizeToFit()
         picker.isUserInteractionEnabled = false
         return picker
     }()
@@ -129,6 +136,9 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         setupLayout()
         setupNavigationBar()
         configureView()
+        hideKeyboardWhenTappedAround()
+        isEditing = false
+        view.backgroundColor = .systemGray6
     }
     
     func setupHierarchy() {
@@ -148,8 +158,10 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     
     func setupLayout() {
         avatarContainer.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(25)
-            make.width.height.equalTo(50)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            //make.width.equalTo(80)
+            make.centerY.equalTo(view.snp.centerY)
+            //make.bottom.equalTo(nameStack.snp.top).offset(10)
         }
         nameIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(nameStack).offset(5)
@@ -195,10 +207,10 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     }
 
     func configureView() {
-        let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
-        avatarContainer.kf.setImage(with: imageURL)
-        
-    }
+            let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
+            avatarContainer.kf.setImage(with: imageURL)
+        }
+    
 
     @objc func editButtonPressed() {
         func changeButtonOutlook() {
@@ -216,8 +228,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
                 dateOfBirthLabel.isUserInteractionEnabled = false
                 genderPicker.isUserInteractionEnabled = false
 
-
-                detailPresenter?.updateUserInfo(name: nameLabel.text ?? "Name deleted", dateOfBirth: dateOfBirthLabel.text, gender: genderPicker.selectedRow(inComponent:))
+                detailPresenter?.updateUserInfo(name: nameLabel.text ?? "Name deleted", dateOfBirth: dateOfBirthLabel.text, gender: chosenGenderPickerOption)
             }
         }
     }
@@ -225,42 +236,41 @@ class DetailViewController: UIViewController, DetailViewProtocol {
 
 extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        3
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         1
     }
 
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        3
+    }
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return DetailViewController.GenderPickerOptions.man.rawValue
+        if row == 0 {
+            return GenderPickerOptions.man.rawValue
         }
-        if component == 1 {
-            return DetailViewController.GenderPickerOptions.woman.rawValue
+        if row == 1 {
+            return GenderPickerOptions.woman.rawValue
         }
-        if component == 2 {
-            return DetailViewController.GenderPickerOptions.notSure.rawValue
+        if row == 2 {
+            return GenderPickerOptions.notSure.rawValue
         } else {
             return "Prefer not to say"
         }
     }
 
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if component == 0 {
-//            genderPicker.
-//        }
-//        if component == 1 {
-//            return DetailViewController.GenderPickerOptions.woman.rawValue
-//        }
-//        if component == 2 {
-//            return DetailViewController.GenderPickerOptions.notSure.rawValue
-//        } else {
-//            return "Prefer not to say"
-//        }
-//    }
-
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+            chosenGenderPickerOption = GenderPickerOptions.man.rawValue
+        }
+        if row == 1 {
+            chosenGenderPickerOption = GenderPickerOptions.woman.rawValue
+        }
+        if row == 2 {
+            chosenGenderPickerOption = GenderPickerOptions.notSure.rawValue
+        } else {
+            chosenGenderPickerOption = "Prefer not to say"
+        }
     }
+}
 
 extension DetailViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -276,5 +286,15 @@ extension DetailViewController: UITextFieldDelegate {
                     return true
                 }
             }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+            isEditing = true
+        return true
         }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+            isEditing = false
+        }
+    }
+
 

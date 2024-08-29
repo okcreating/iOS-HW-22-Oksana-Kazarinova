@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C63588052C7B836E00FDA690 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C63588042C7B836E00FDA690 /* SnapKit */; };
+		C63A581D2C80BCF60062E7DA /* KeyBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */; };
 		C63F5FD42C7FD8E80010F4FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C63F5FD32C7FD8E80010F4FC /* Kingfisher */; };
 		C65D726E2C7A631C000D6AE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */; };
 		C65D72702C7A631C000D6AE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardExtension.swift; sourceTree = "<group>"; };
 		C65D726A2C7A631C000D6AE0 /* iOS HW-22 Oksana Kazarinova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS HW-22 Oksana Kazarinova.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C63A581E2C80FEFE0062E7DA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C65D72612C7A631C000D6AE0 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +120,7 @@
 				C65D72842C7A6698000D6AE0 /* Model */,
 				C65D72872C7A6711000D6AE0 /* Main Screen */,
 				C65D72882C7A6753000D6AE0 /* Detail Screen */,
+				C63A581E2C80FEFE0062E7DA /* Extensions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -246,6 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C63A581D2C80BCF60062E7DA /* KeyBoardExtension.swift in Sources */,
 				C65D72722C7A631C000D6AE0 /* MainViewController.swift in Sources */,
 				C65D72982C7A7FB5000D6AE0 /* MainTableViewCell.swift in Sources */,
 				C65D726E2C7A631C000D6AE0 /* AppDelegate.swift in Sources */,

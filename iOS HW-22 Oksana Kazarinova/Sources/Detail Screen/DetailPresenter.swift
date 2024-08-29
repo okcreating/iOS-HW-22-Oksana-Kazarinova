@@ -18,8 +18,7 @@ protocol DetailViewProtocol: AnyObject {
 protocol DetailPresenterProtocol {
     //init(view: DetailViewProtocol, user: User)
     func setChosenUser()
-    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?)
-
+    func updateUserInfo(name: String?, dateOfBirth: String?, gender: String?)
 }
 
 final class DetailViewPresenterProtocol: DetailPresenterProtocol {
@@ -34,10 +33,13 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         view.user = user
     }
 
-    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?) {
-        user?.name = name
+    func updateUserInfo(name: String?, dateOfBirth: String?, gender: String?) {
+        user?.name = name ?? "Unknown User"
         user?.dateOfBirth = dateOfBirth
         user?.gender = gender
+        if user?.photo == nil {
+            user?.photo = "https://robohash.org/\(name ?? "dhdhg")"
+        }
         CoreDataManager.shared.updateUser()
     }
 }

@@ -7,14 +7,14 @@
 
 import CoreData
 
-final  class CoreDataManager {
+final class CoreDataManager {
 
     static let shared = CoreDataManager()
 
-    var allUsers: [User]?
+    var allUsers = [User]()
 
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "AllUsers")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { description, error in
             if let error = error as NSError? {
                 fatalError("Error: \(error.userInfo)")
@@ -59,11 +59,12 @@ final  class CoreDataManager {
         fetchAllUsers()
     }
 
-    func addUser(name: String, dateOfBirth: String?, gender: String?) {
+    func addUser(name: String?, dateOfBirth: String?, gender: String?, photo: String?) {
         let newUser = User(context: objectContext)
         newUser.name = name
         newUser.dateOfBirth = dateOfBirth
         newUser.gender = gender
+        newUser.photo = photo
         updateUser()
 //        do {
 //            try objectContext.save()
