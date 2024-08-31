@@ -7,14 +7,14 @@
 
 import CoreData
 
-final  class CoreDataManager {
+final class CoreDataManager {
 
     static let shared = CoreDataManager()
 
     var allUsers: [User]?
 
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "AllUsers")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores { description, error in
             if let error = error as NSError? {
                 fatalError("Error: \(error.userInfo)")
@@ -50,10 +50,21 @@ final  class CoreDataManager {
         }
     }
 
-    func addUser(name: String) {
+    func updateUser() {
+       // userToUpdate.name = name
+       // userToUpdate.photo = photo
+       // userToUpdate.dateOfBirth = dateOfBirth
+        //userToUpdate.gender = gender
+        saveData()
+        fetchAllUsers()
+    }
+
+    func addUser(name: String?, dateOfBirth: String?, gender: String?) {
         let newUser = User(context: objectContext)
         newUser.name = name
-        saveData()
+        newUser.dateOfBirth = dateOfBirth
+        newUser.gender = gender
+        updateUser()
 //        do {
 //            try objectContext.save()
 //        } catch {
@@ -63,25 +74,15 @@ final  class CoreDataManager {
         //allUsers = fetchAllUsers()
     }
 
-    func updateUser(userToUpdate: User, photo: Data?, name: String, dateOfBirth: Date?, gender: String?) {
-        userToUpdate.name = name
-        userToUpdate.photo = photo
-        userToUpdate.dateOfBirth = dateOfBirth
-        userToUpdate.gender = gender
-        saveData()
-       // allUsers = fetchAllUsers()
-    }
-
     func deleteUser(user: User) {
         objectContext.delete(user)
-        saveData()
 //        do {
 //            try objectContext.save()
 //        } catch {
 //            objectContext.rollback()
 //            print("Deleting user error: \(error.localizedDescription)")
 //        }
-      //  allUsers = fetchAllUsers()
+        updateUser()
     }
 }
 

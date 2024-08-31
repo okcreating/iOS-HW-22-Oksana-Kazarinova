@@ -16,7 +16,8 @@ class MainTableViewCell: UITableViewCell {
 
     lazy var name: UILabel = {
         let name = UILabel()
-        name.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        name.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        name.textAlignment = .center
         return name
     }()
 
@@ -40,7 +41,8 @@ class MainTableViewCell: UITableViewCell {
 
     func setupLayout() {
         name.snp.makeConstraints { make in
-            make.leading.top.bottom.equalTo(contentView).offset(7)
+            make.leading.equalTo(contentView).offset(20)
+            make.top.bottom.equalTo(contentView).offset(12)
         }
     }
 }

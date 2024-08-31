@@ -6,20 +6,18 @@
 //
 
 import Foundation
-import UIKit
 
 protocol DetailViewProtocol: AnyObject {
-    var editButton: UIBarButtonItem { get set }
+    var user: User? { get set }
     func setupHierarchy()
     func setupLayout()
     func setupNavigationBar()
 }
 
 protocol DetailPresenterProtocol {
-    init(view: DetailViewProtocol, user: User)
-    func updateUserInfo()
-    func changeButtonOutlook()
-
+    //init(view: DetailViewProtocol, user: User)
+    func setChosenUser()
+    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?)
 }
 
 final class DetailViewPresenterProtocol: DetailPresenterProtocol {
@@ -30,18 +28,15 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         self.user = user
     }
 
-    func updateUserInfo() {
-        CoreDataManager.shared.updateUser(userToUpdate: <#T##User#>, photo: <#T##Data?#>, name: <#T##String#>, dateOfBirth: <#T##Date?#>, gender: <#T##String?#>)
+    func setChosenUser() {
+        view.user = user
     }
 
-    func changeButtonOutlook() {
-        view.editButton.isSelected.toggle()
-        if view.editButton.isSelected {
-            view.editButton.title = "Save"
-        } else {
-            view.editButton.title = "Edit"
-        }
+    func updateUserInfo(name: String, dateOfBirth: String?, gender: String?) {
+        user?.name = name
+        user?.dateOfBirth = dateOfBirth
+        user?.gender = gender
+        //setChosenUser()
+        CoreDataManager.shared.updateUser()
     }
-
-
 }
