@@ -21,8 +21,6 @@ class MainViewController: UIViewController, MainViewProtocol {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .systemGray6
-        tableView.separatorStyle = .singleLine
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
 
@@ -108,9 +106,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         1
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        39
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        39
+//    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell
