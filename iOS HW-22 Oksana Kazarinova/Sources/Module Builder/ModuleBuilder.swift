@@ -9,7 +9,7 @@ import UIKit
 
 protocol ModuleBuilder {
     static func createMainModule() -> UIViewController
-    static func createDetailModule() -> UIViewController
+    static func createDetailModule(model: User) -> UIViewController
 }
 
 class ModuleAssembler: ModuleBuilder {
@@ -21,7 +21,7 @@ class ModuleAssembler: ModuleBuilder {
         return view
     }
 
-    static func createDetailModule() -> UIViewController {
+    static func createDetailModule(model: User) -> UIViewController {
         let user = User()
         let view = DetailViewController()
         let presenter = DetailViewPresenterProtocol(view: view, user: user)

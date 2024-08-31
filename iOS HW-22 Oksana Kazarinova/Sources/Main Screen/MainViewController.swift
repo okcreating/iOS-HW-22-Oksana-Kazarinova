@@ -11,6 +11,7 @@ import SnapKit
 class MainViewController: UIViewController, MainViewProtocol {
 
     var mainPresenter: MainPresenterProtocol?
+    var detailPresenter: DetailViewProtocol?
 
     // MARK: - Outlets
 
@@ -44,7 +45,6 @@ class MainViewController: UIViewController, MainViewProtocol {
         return button
     }()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6
@@ -73,6 +73,7 @@ class MainViewController: UIViewController, MainViewProtocol {
             make.trailing.equalTo(view).offset(-7)
             make.top.equalTo(textField.snp.bottom).offset(7)
         }
+
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(addUserButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
@@ -92,7 +93,7 @@ class MainViewController: UIViewController, MainViewProtocol {
         if textField.text == "" {
             return
         } else {
-            mainPresenter?.addUser(name: textField.text ?? "Unknown User", dateOfBirth: nil, gender: nil, photo: nil)
+            mainPresenter?.addUser(name: textField.text ?? "Unknown User", dateOfBirth: nil, gender: nil)
             textField.text = ""
         }
     }
@@ -108,7 +109,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+        39
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,16 +123,20 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = ModuleAssembler.createDetailModule() as? DetailViewController ?? UIViewController()
-
+        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return }
+        let detailController = ModuleAssembler.createDetailModule(model: user)
+        detailPresenter?.user = user
          navigationController?.pushViewController(detailController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return .none }
+         .delete
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return }
         mainPresenter?.deleteUser(user: user)
-        return .delete
     }
 }
 
