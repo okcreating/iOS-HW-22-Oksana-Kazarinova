@@ -43,6 +43,11 @@ class MainViewController: UIViewController, MainViewProtocol {
         return button
     }()
 
+    override func viewWillAppear(_ animated:Bool) {
+       super.viewWillAppear(animated)
+       mainTableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6

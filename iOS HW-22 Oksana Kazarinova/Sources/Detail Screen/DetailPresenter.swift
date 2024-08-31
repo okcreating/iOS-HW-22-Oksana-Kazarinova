@@ -37,6 +37,6 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
         user?.name = name
         user?.dateOfBirth = dateOfBirth
         user?.gender = gender
-        CoreDataManager.shared.updateUser(userToUpdate: user!, name: name, dateOfBirth: dateOfBirth, gender: gender)
+        CoreDataManager.shared.updateUser(userToUpdate: user ?? User(), name: name, dateOfBirth: dateOfBirth, gender: gender)
     }
 }
