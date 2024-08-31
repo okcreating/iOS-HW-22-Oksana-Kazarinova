@@ -12,6 +12,8 @@ class DetailViewController: UIViewController, DetailViewProtocol {
 
     var detailPresenter: DetailPresenterProtocol?
 
+    let pickerOptions = ["Gentleman", "Lady", "Other", "Prefer not to answer"]
+
     var user: User?
 //        didSet {
 //            nameLabel.text = user?.name
@@ -27,15 +29,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         dateOfBirthLabel.text = user?.dateOfBirth
         genderLabel.text = user?.gender
            // let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
-        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\("hfjdhhjfhdjdsjskdfhvy")"))
-    }
-
-    var chosenGenderPickerOption: GenderPickerOptions.RawValue?
-
-    enum GenderPickerOptions: String {
-        case man = "Gentleman"
-        case woman = "Lady"
-        case notSure = "Other"
+        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwjhgbfbncx")"))
     }
     
     // MARK: - Outlets
@@ -55,9 +49,8 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
         avatarContainer.contentMode = .scaleAspectFill
-        avatarContainer.layer.masksToBounds = true
-        avatarContainer.clipsToBounds = true
-        avatarContainer.layer.cornerRadius = 12
+//        avatarContainer.layer.masksToBounds = true
+//        avatarContainer.clipsToBounds = true
         return avatarContainer
     }()
     
@@ -67,7 +60,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
         imageContainer.image = UIImage(systemName: "person")
-        //imageContainer.tintColor = .white
         return imageContainer
     }()
 
@@ -75,20 +67,11 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
-        label.placeholder = "name here"
-        //label.returnKeyType = .done
+        label.placeholder = "Type your name here"
+        label.returnKeyType = .done
         label.isUserInteractionEnabled = false
         return label
     }()
-
-//    lazy var nameLabel: UITextField = {
-//        let label = UITextField()
-//        label.font = .systemFont(ofSize: 13, weight: .regular)
-//        label.textAlignment = .left
-//        label.returnKeyType = .done
-//        label.isUserInteractionEnabled = false
-//        return label
-//    }()
     
     lazy var dateIconContainer: UIImageView = {
         let imageContainer = UIImageView()
@@ -106,6 +89,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         label.textAlignment = .left
         label.placeholder = "dd/mm/yyy"
         label.isUserInteractionEnabled = false
+        label.keyboardType = .decimalPad
         label.delegate = self
         return label
     }()
@@ -125,17 +109,17 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
         label.placeholder = "Gender"
+        label.inputView = genderPicker
+        label.delegate = self
         label.isUserInteractionEnabled = false
         return label
     }()
     
     lazy var genderPicker: UIPickerView = {
         let picker = UIPickerView()
-        picker.dataSource = self
+       // picker.dataSource = self
         picker.delegate = self
-        
-        //picker.sizeToFit()
-        //picker.isUserInteractionEnabled = false
+        picker.isHidden = true
         return picker
     }()
     
@@ -162,7 +146,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
-
         configureUser()
         hideKeyboardWhenTappedAround()
         isEditing = false
@@ -177,11 +160,10 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         dateStack.addSubview(dateOfBirthLabel)
         genderStack.addSubview(genderIconContainer)
         genderStack.addSubview(genderLabel)
-       // genderStack.addSubview(genderPicker)
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
-        // navigationController?.navigationBar.addSubview(editButton)
+        view.addSubview(genderPicker)
     }
     
     func setupLayout() {
@@ -213,9 +195,9 @@ class DetailViewController: UIViewController, DetailViewProtocol {
             make.leading.equalTo(genderIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(genderStack).offset(5)
         }
-//        genderPicker.snp.makeConstraints { make in
-//            make.trailing.top.bottom.equalTo(genderStack).offset(5)
-//        }
+        genderPicker.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(view)
+        }
         nameStack.snp.makeConstraints { make in
             make.top.equalTo(avatarContainer.snp.bottom).offset(30)
             make.leading.trailing.equalTo(view).offset(5)
@@ -245,6 +227,11 @@ class DetailViewController: UIViewController, DetailViewProtocol {
                 nameLabel.isUserInteractionEnabled = true
                 dateOfBirthLabel.isUserInteractionEnabled = true
                 genderLabel.isUserInteractionEnabled = true
+               // genderPicker.isUserInteractionEnabled = true
+//                if genderLabel.isSelected {
+//                    genderPicker.isHidden = false
+//                }
+
                 print("\(String(describing: nameLabel.text))")
 
             } else {
@@ -253,7 +240,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
                 nameLabel.isUserInteractionEnabled = false
                 dateOfBirthLabel.isUserInteractionEnabled = false
                 genderLabel.isUserInteractionEnabled = false
-                
+                //genderPicker.isUserInteractionEnabled = false
                 detailPresenter?.updateUserInfo(name: nameLabel.text ?? "Unknown User", dateOfBirth: dateOfBirthLabel.text, gender: genderLabel.text ?? "Not chosen")
             }
         }
@@ -265,35 +252,16 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        3
+        pickerOptions.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if row == 0 {
-            return GenderPickerOptions.man.rawValue
-        }
-        if row == 1 {
-            return GenderPickerOptions.woman.rawValue
-        }
-        if row == 2 {
-            return GenderPickerOptions.notSure.rawValue
-        } else {
-            return "Prefer not to say"
-        }
+        pickerOptions[row]
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            genderLabel.text = GenderPickerOptions.man.rawValue
-        }
-        if row == 1 {
-            genderLabel.text = GenderPickerOptions.woman.rawValue
-        }
-        if row == 2 {
-            genderLabel.text = GenderPickerOptions.notSure.rawValue
-        } else {
-            genderLabel.text = "Not Chosen"
-        }
+        genderLabel.text = pickerOptions[row]
+
     }
 }
 
@@ -307,18 +275,24 @@ extension DetailViewController: UITextFieldDelegate {
                     }
                     return !(textField.text!.count > 9 && (string.count ) > range.length)
                 }
-                else {
-                    return true
-                }
-            }
+        if textField == genderLabel {
+            return false
+        }
+        return true
+    }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == genderLabel {
+            genderPicker.isHidden = false
+        } else {
             isEditing = true
+        }
         return true
         }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
             isEditing = false
+        genderPicker.isHidden = true
         }
     }
 
