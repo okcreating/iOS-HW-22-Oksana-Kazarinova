@@ -11,7 +11,7 @@ import SnapKit
 class MainViewController: UIViewController, MainViewProtocol {
 
     var mainPresenter: MainPresenterProtocol?
-    var detailPresenter: DetailViewProtocol?
+    var detailPresenter: DetailPresenterProtocol?
 
     // MARK: - Outlets
 
@@ -125,7 +125,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let user = mainPresenter?.getUserByIndex(at: indexPath.row) else { return }
         let detailController = ModuleAssembler.createDetailModule(model: user)
-        detailPresenter?.user = user
+        //detailPresenter?.setChosenUser()
+        user.name = user.name
          navigationController?.pushViewController(detailController, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }

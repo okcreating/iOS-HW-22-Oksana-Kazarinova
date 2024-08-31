@@ -33,6 +33,7 @@ final class CoreDataManager {
         if objectContext.hasChanges {
             do {
                 try objectContext.save()
+                fetchAllUsers()
             } catch {
                 objectContext.rollback()
                 let savingError = error as NSError
@@ -50,13 +51,11 @@ final class CoreDataManager {
         }
     }
 
-    func updateUser() {
-       // userToUpdate.name = name
-       // userToUpdate.photo = photo
-       // userToUpdate.dateOfBirth = dateOfBirth
-        //userToUpdate.gender = gender
+    func updateUser(userToUpdate: User, name: String?, dateOfBirth: String?, gender: String?) {
+        userToUpdate.name = name
+        userToUpdate.dateOfBirth = dateOfBirth
+        userToUpdate.gender = gender
         saveData()
-        fetchAllUsers()
     }
 
     func addUser(name: String?, dateOfBirth: String?, gender: String?) {
@@ -64,25 +63,12 @@ final class CoreDataManager {
         newUser.name = name
         newUser.dateOfBirth = dateOfBirth
         newUser.gender = gender
-        updateUser()
-//        do {
-//            try objectContext.save()
-//        } catch {
-//            objectContext.rollback()
-//            print("Adding new user error: \(error.localizedDescription)")
-//        }
-        //allUsers = fetchAllUsers()
+        saveData()
     }
 
     func deleteUser(user: User) {
         objectContext.delete(user)
-//        do {
-//            try objectContext.save()
-//        } catch {
-//            objectContext.rollback()
-//            print("Deleting user error: \(error.localizedDescription)")
-//        }
-        updateUser()
+        saveData()
     }
 }
 

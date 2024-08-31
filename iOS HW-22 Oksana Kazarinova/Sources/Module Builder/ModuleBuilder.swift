@@ -22,9 +22,10 @@ class ModuleAssembler: ModuleBuilder {
     }
 
     static func createDetailModule(model: User) -> UIViewController {
-        let user = User()
+        let user = model
+        user.name = model.name
         let view = DetailViewController()
-        let presenter = DetailViewPresenterProtocol(view: view, user: user)
+        let presenter = DetailViewPresenterProtocol(view: view, user: model)
         view.detailPresenter = presenter
         return view
     }

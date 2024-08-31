@@ -22,7 +22,7 @@ protocol DetailPresenterProtocol {
 
 final class DetailViewPresenterProtocol: DetailPresenterProtocol {
     let view: DetailViewProtocol
-    let user: User?
+    var user = User()
     init(view: any DetailViewProtocol, user: User) {
         self.view = view
         self.user = user
@@ -33,10 +33,9 @@ final class DetailViewPresenterProtocol: DetailPresenterProtocol {
     }
 
     func updateUserInfo(name: String, dateOfBirth: String?, gender: String?) {
-        user?.name = name
-        user?.dateOfBirth = dateOfBirth
-        user?.gender = gender
-        //setChosenUser()
-        CoreDataManager.shared.updateUser()
+        user.name = name
+        user.dateOfBirth = dateOfBirth
+        user.gender = gender
+        CoreDataManager.shared.updateUser(userToUpdate: user, name: name, dateOfBirth: dateOfBirth, gender: gender)
     }
 }

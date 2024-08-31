@@ -29,7 +29,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         dateOfBirthLabel.text = user?.dateOfBirth
         genderLabel.text = user?.gender
            // let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
-        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwjhgbfbncx")"))
+        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwj09';x")"))
     }
     
     // MARK: - Outlets
@@ -79,7 +79,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
         imageContainer.image = UIImage(systemName: "calendar")
-        //imageContainer.tintColor = .white
         return imageContainer
     }()
     
@@ -100,7 +99,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         imageContainer.layer.masksToBounds = true
         imageContainer.clipsToBounds = true
         imageContainer.image = UIImage(systemName: "person.2.circle")
-        //  imageContainer.tintColor = .white
         return imageContainer
     }()
     
@@ -146,6 +144,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         setupHierarchy()
         setupLayout()
         setupNavigationBar()
+        avatarContainer.image = nil
         configureUser()
         hideKeyboardWhenTappedAround()
         isEditing = false
@@ -227,10 +226,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
                 nameLabel.isUserInteractionEnabled = true
                 dateOfBirthLabel.isUserInteractionEnabled = true
                 genderLabel.isUserInteractionEnabled = true
-               // genderPicker.isUserInteractionEnabled = true
-//                if genderLabel.isSelected {
-//                    genderPicker.isHidden = false
-//                }
 
                 print("\(String(describing: nameLabel.text))")
 
@@ -261,7 +256,6 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         genderLabel.text = pickerOptions[row]
-
     }
 }
 
