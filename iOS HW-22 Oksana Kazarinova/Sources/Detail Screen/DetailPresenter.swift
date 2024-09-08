@@ -15,12 +15,11 @@ protocol DetailViewProtocol: AnyObject {
 }
 
 protocol DetailPresenterProtocol {
-    //init(view: DetailViewProtocol, user: User)
     func setChosenUser()
     func updateUserInfo(name: String, dateOfBirth: String?, gender: String?)
 }
 
-final class DetailViewPresenterProtocol: DetailPresenterProtocol {
+final class DetailViewPresenter: DetailPresenterProtocol {
     let view: DetailViewProtocol?
     var user : User?
     init(view: any DetailViewProtocol, user: User) {

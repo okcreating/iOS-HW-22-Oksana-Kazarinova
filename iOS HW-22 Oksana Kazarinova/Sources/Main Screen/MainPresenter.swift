@@ -23,7 +23,7 @@ protocol MainPresenterProtocol {
     func fetchUsers()
 }
 
-final class MainViewPresenterProtocol: MainPresenterProtocol {
+final class MainViewPresenter: MainPresenterProtocol {
 
     let view: MainViewProtocol
     let user: User

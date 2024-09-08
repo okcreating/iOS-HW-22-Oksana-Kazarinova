@@ -8,27 +8,18 @@
 import UIKit
 import Kingfisher
 
-class DetailViewController: UIViewController, DetailViewProtocol {
+final class DetailViewController: UIViewController, DetailViewProtocol {
 
     var detailPresenter: DetailPresenterProtocol?
 
     let pickerOptions = ["Gentleman", "Lady", "Other", "Prefer not to answer"]
 
     var user: User?
-//        didSet {
-//            nameLabel.text = user?.name
-//            dateOfBirthLabel.text = user?.dateOfBirth
-//            genderLabel.text = user?.gender
-//                let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
-//                avatarContainer.kf.setImage(with: imageURL)
-//        }
-//    }
 
     func configureUser() {
-        nameLabel.text = user?.name
+        nameTextField.text = user?.name
         dateOfBirthLabel.text = user?.dateOfBirth
-        genderLabel.text = user?.gender
-           // let imageURL = URL(string: "https://robohash.org/\(nameLabel.text ?? "hjfhdjdsjskdfhvy")")
+        genderTextField.text = user?.gender
         avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwj09';x")"))
     }
     
@@ -63,7 +54,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
 
-    lazy var nameLabel: UITextField = {
+    lazy var nameTextField: UITextField = {
         let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
@@ -82,7 +73,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var dateOfBirthLabel: UITextField = {
+    lazy var dateOfBirthTextField: UITextField = {
         let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
@@ -102,7 +93,7 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var genderLabel: UITextField = {
+    lazy var genderTextField: UITextField = {
         let label = UITextField()
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.textAlignment = .left
@@ -154,11 +145,11 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     func setupHierarchy() {
         view.addSubview(avatarContainer)
         nameStack.addSubview(nameIconContainer)
-        nameStack.addSubview(nameLabel)
+        nameStack.addSubview(nameTextField)
         dateStack.addSubview(dateIconContainer)
-        dateStack.addSubview(dateOfBirthLabel)
+        dateStack.addSubview(dateOfBirthTextField)
         genderStack.addSubview(genderIconContainer)
-        genderStack.addSubview(genderLabel)
+        genderStack.addSubview(genderTextField)
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
@@ -168,7 +159,6 @@ class DetailViewController: UIViewController, DetailViewProtocol {
     func setupLayout() {
         avatarContainer.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(70)
-            //make.center.equalToSuperview().offset(70)
             make.leading.equalTo(view).offset(155)
             make.trailing.equalTo(view).offset(-155)
             make.height.equalTo(70)
@@ -176,21 +166,21 @@ class DetailViewController: UIViewController, DetailViewProtocol {
         nameIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(nameStack).offset(5)
         }
-        nameLabel.snp.makeConstraints { make in
+        nameTextField.snp.makeConstraints { make in
             make.leading.equalTo(nameIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(nameStack).offset(5)
         }
         dateIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(dateStack).offset(5)
         }
-        dateOfBirthLabel.snp.makeConstraints { make in
+        dateOfBirthTextField.snp.makeConstraints { make in
             make.leading.equalTo(dateIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(dateStack).offset(5)
         }
         genderIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(genderStack).offset(5)
         }
-        genderLabel.snp.makeConstraints { make in
+        genderTextField.snp.makeConstraints { make in
             make.leading.equalTo(genderIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(genderStack).offset(5)
         }
@@ -223,20 +213,20 @@ class DetailViewController: UIViewController, DetailViewProtocol {
             editButton.isSelected.toggle()
             if editButton.isSelected {
                 editButton.title = "Save"
-                nameLabel.isUserInteractionEnabled = true
-                dateOfBirthLabel.isUserInteractionEnabled = true
-                genderLabel.isUserInteractionEnabled = true
+                nameTextField.isUserInteractionEnabled = true
+                dateOfBirthTextField.isUserInteractionEnabled = true
+                genderTextField.isUserInteractionEnabled = true
 
-                print("\(String(describing: nameLabel.text))")
+                print("\(String(describing: nameTextField.text))")
 
             } else {
                 editButton.title = "Edit"
                 editButton.customView?.layer.borderColor = UIColor.blue.cgColor
-                nameLabel.isUserInteractionEnabled = false
-                dateOfBirthLabel.isUserInteractionEnabled = false
-                genderLabel.isUserInteractionEnabled = false
+                nameTextField.isUserInteractionEnabled = false
+                dateOfBirthTextField.isUserInteractionEnabled = false
+                genderTextField.isUserInteractionEnabled = false
                 //genderPicker.isUserInteractionEnabled = false
-                detailPresenter?.updateUserInfo(name: nameLabel.text ?? "Unknown User", dateOfBirth: dateOfBirthLabel.text, gender: genderLabel.text ?? "Not chosen")
+                detailPresenter?.updateUserInfo(name: nameTextField.text ?? "Unknown User", dateOfBirth: dateOfBirthTextField.text, gender: genderTextField.text ?? "Not chosen")
             }
         }
     }
@@ -255,28 +245,28 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        genderLabel.text = pickerOptions[row]
+        genderTextField.text = pickerOptions[row]
     }
 }
 
 extension DetailViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == dateOfBirthLabel {
-            if (dateOfBirthLabel.text?.count == 2) || (dateOfBirthLabel.text?.count == 5) {
+        if textField == dateOfBirthTextField {
+            if (dateOfBirthTextField.text?.count == 2) || (dateOfBirthTextField.text?.count == 5) {
                         if !(string == "") {
-                            dateOfBirthLabel.text = (dateOfBirthLabel.text)! + "-"
+                            dateOfBirthTextField.text = (dateOfBirthTextField.text)! + "-"
                         }
                     }
                     return !(textField.text!.count > 9 && (string.count ) > range.length)
                 }
-        if textField == genderLabel {
+        if textField == genderTextField {
             return false
         }
         return true
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == genderLabel {
+        if textField == genderTextField {
             genderPicker.isHidden = false
         } else {
             isEditing = true

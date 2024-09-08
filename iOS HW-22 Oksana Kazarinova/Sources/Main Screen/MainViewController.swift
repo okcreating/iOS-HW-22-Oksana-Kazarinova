@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController, MainViewProtocol {
+final class MainViewController: UIViewController, MainViewProtocol {
 
     var mainPresenter: MainPresenterProtocol?
     var detailPresenter: DetailPresenterProtocol?

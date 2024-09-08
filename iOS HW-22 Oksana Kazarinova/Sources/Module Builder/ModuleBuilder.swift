@@ -16,7 +16,7 @@ class ModuleAssembler: ModuleBuilder {
     static func createMainModule() -> UIViewController {
         let view = MainViewController()
         let user = User()
-        let presenter = MainViewPresenterProtocol(view: view, user: user)
+        let presenter = MainViewPresenter(view: view, user: user)
         view.mainPresenter = presenter
         return view
     }
@@ -25,7 +25,7 @@ class ModuleAssembler: ModuleBuilder {
         let user = model
         user.name = model.name
         let view = DetailViewController()
-        let presenter = DetailViewPresenterProtocol(view: view, user: model)
+        let presenter = DetailViewPresenter(view: view, user: model)
         view.detailPresenter = presenter
         return view
     }
