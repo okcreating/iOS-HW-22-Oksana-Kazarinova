@@ -12,20 +12,13 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
 
     var detailPresenter: DetailPresenterProtocol?
 
-    let pickerOptions = ["Gentleman", "Lady", "Other", "Prefer not to answer"]
+    private let pickerOptions = ["Gentleman", "Lady", "Other", "Prefer not to answer"]
 
-    var user: User?
+   var user: User?
 
-    func configureUser() {
-        nameTextField.text = user?.name
-        dateOfBirthLabel.text = user?.dateOfBirth
-        genderTextField.text = user?.gender
-        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwj09';x")"))
-    }
-    
     // MARK: - Outlets
     
-    lazy var editButton: UIBarButtonItem = {
+    private lazy var editButton: UIBarButtonItem = {
         let editButton = UIBarButtonItem()
         editButton.title = "Edit"
         editButton.style = .plain
@@ -37,7 +30,7 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return editButton
     }()
     
-    lazy var avatarContainer: UIImageView = {
+    private lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
         avatarContainer.contentMode = .scaleAspectFill
 //        avatarContainer.layer.masksToBounds = true
@@ -45,7 +38,7 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return avatarContainer
     }()
     
-    lazy var nameIconContainer: UIImageView = {
+    private lazy var nameIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
@@ -54,17 +47,17 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
 
-    lazy var nameTextField: UITextField = {
-        let label = UITextField()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textAlignment = .left
-        label.placeholder = "Type your name here"
-        label.returnKeyType = .done
-        label.isUserInteractionEnabled = false
-        return label
+    private lazy var nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 13, weight: .regular)
+        textField.textAlignment = .left
+        textField.placeholder = "Type your name here"
+        textField.returnKeyType = .done
+        textField.isUserInteractionEnabled = false
+        return textField
     }()
     
-    lazy var dateIconContainer: UIImageView = {
+   private lazy var dateIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
@@ -73,18 +66,30 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var dateOfBirthTextField: UITextField = {
-        let label = UITextField()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textAlignment = .left
-        label.placeholder = "dd/mm/yyy"
-        label.isUserInteractionEnabled = false
-        label.keyboardType = .decimalPad
-        label.delegate = self
-        return label
+   private lazy var dateOfBirthTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 13, weight: .regular)
+        textField.textAlignment = .left
+        textField.placeholder = "dd.mm.yyyy"
+       // textField.isUserInteractionEnabled = false
+        //textField.delegate = self
+        textField.inputView = datePicker
+        return textField
     }()
-    
-    lazy var genderIconContainer: UIImageView = {
+
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.preferredDatePickerStyle = .inline
+        picker.locale = .autoupdatingCurrent
+        picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateChanged))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        return picker
+    }()
+
+   private lazy var genderIconContainer: UIImageView = {
         let imageContainer = UIImageView()
         imageContainer.contentMode = .scaleToFill
         imageContainer.layer.masksToBounds = true
@@ -93,18 +98,18 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return imageContainer
     }()
     
-    lazy var genderTextField: UITextField = {
-        let label = UITextField()
-        label.font = .systemFont(ofSize: 13, weight: .regular)
-        label.textAlignment = .left
-        label.placeholder = "Gender"
-        label.inputView = genderPicker
-        label.delegate = self
-        label.isUserInteractionEnabled = false
-        return label
+    private lazy var genderTextField: UITextField = {
+        let textField = UITextField()
+        textField.font = .systemFont(ofSize: 13, weight: .regular)
+        textField.textAlignment = .left
+        textField.placeholder = "Gender"
+        textField.inputView = genderPicker
+        textField.delegate = self
+        textField.isUserInteractionEnabled = false
+        return textField
     }()
     
-    lazy var genderPicker: UIPickerView = {
+    private lazy var genderPicker: UIPickerView = {
         let picker = UIPickerView()
        // picker.dataSource = self
         picker.delegate = self
@@ -112,19 +117,19 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         return picker
     }()
     
-    lazy var nameStack: UIStackView = {
+    private lazy var nameStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
     }()
     
-    lazy var dateStack: UIStackView = {
+    private lazy var dateStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
     }()
     
-    lazy var genderStack: UIStackView = {
+    private lazy var genderStack: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         return view
@@ -153,6 +158,7 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
+        //view.addSubview(datePicker)
         view.addSubview(genderPicker)
     }
     
@@ -177,6 +183,9 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
             make.leading.equalTo(dateIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(dateStack).offset(5)
         }
+//        datePicker.snp.makeConstraints { make in
+//            make.trailing.eq
+//        }
         genderIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(genderStack).offset(5)
         }
@@ -204,12 +213,15 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
     func setupNavigationBar() {
         navigationItem.rightBarButtonItem = editButton
     }
-    
-    @objc func editButtonPressed() {
-        changeButtonOutlook()
+
+    func configureUser() {
+        nameTextField.text = user?.name
+        dateOfBirthTextField.text = user?.dateOfBirth
+        genderTextField.text = user?.gender
+        avatarContainer.kf.setImage(with: URL(string: "https://robohash.org/\(user?.name ?? "qwj09';x")"))
     }
 
-        func changeButtonOutlook() {
+    @objc func editButtonPressed() {
             editButton.isSelected.toggle()
             if editButton.isSelected {
                 editButton.title = "Save"
@@ -229,7 +241,14 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
                 detailPresenter?.updateUserInfo(name: nameTextField.text ?? "Unknown User", dateOfBirth: dateOfBirthTextField.text, gender: genderTextField.text ?? "Not chosen")
             }
         }
+
+    @objc func dateChanged() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "dd.MM.yyyy"
+        dateOfBirthTextField.text = formatter.string(from: datePicker.date)
     }
+}
 
 extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -250,20 +269,20 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension DetailViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == dateOfBirthTextField {
-            if (dateOfBirthTextField.text?.count == 2) || (dateOfBirthTextField.text?.count == 5) {
-                        if !(string == "") {
-                            dateOfBirthTextField.text = (dateOfBirthTextField.text)! + "-"
-                        }
-                    }
-                    return !(textField.text!.count > 9 && (string.count ) > range.length)
-                }
-        if textField == genderTextField {
-            return false
-        }
-        return true
-    }
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        if textField == dateOfBirthTextField {
+//            if (dateOfBirthTextField.text?.count == 2) || (dateOfBirthTextField.text?.count == 5) {
+//                        if !(string == "") {
+//                            dateOfBirthTextField.text = (dateOfBirthTextField.text)! + "-"
+//                        }
+//                    }
+//                    return !(textField.text!.count > 9 && (string.count ) > range.length)
+//                }
+//        if textField == genderTextField {
+//            return false
+//        }
+//        return true
+//    }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == genderTextField {
