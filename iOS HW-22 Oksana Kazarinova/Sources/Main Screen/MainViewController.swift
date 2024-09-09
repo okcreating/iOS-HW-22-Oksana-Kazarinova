@@ -70,13 +70,11 @@ final class MainViewController: UIViewController, MainViewProtocol {
             make.trailing.equalTo(view).offset(-7)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
         }
-
         addUserButton.snp.makeConstraints { make in
             make.leading.equalTo(view).offset(7)
             make.trailing.equalTo(view).offset(-7)
             make.top.equalTo(textField.snp.bottom).offset(7)
         }
-
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(addUserButton.snp.bottom).offset(20)
             make.leading.trailing.bottom.equalToSuperview()
@@ -111,9 +109,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         1
     }
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        39
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        39
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell

@@ -33,8 +33,6 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
     private lazy var avatarContainer: UIImageView = {
         let avatarContainer = UIImageView()
         avatarContainer.contentMode = .scaleAspectFill
-//        avatarContainer.layer.masksToBounds = true
-//        avatarContainer.clipsToBounds = true
         return avatarContainer
     }()
     
@@ -71,7 +69,7 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         textField.font = .systemFont(ofSize: 13, weight: .regular)
         textField.textAlignment = .left
         textField.placeholder = "dd.mm.yyyy"
-       // textField.isUserInteractionEnabled = false
+        textField.isUserInteractionEnabled = false
         //textField.delegate = self
         textField.inputView = datePicker
         return textField
@@ -82,6 +80,7 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         picker.datePickerMode = .date
         picker.preferredDatePickerStyle = .inline
         picker.locale = .autoupdatingCurrent
+        picker.isEnabled = false
         picker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateChanged))
         tapGesture.cancelsTouchesInView = false
@@ -158,7 +157,6 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         view.addSubview(nameStack)
         view.addSubview(dateStack)
         view.addSubview(genderStack)
-        //view.addSubview(datePicker)
         view.addSubview(genderPicker)
     }
     
@@ -183,9 +181,6 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
             make.leading.equalTo(dateIconContainer.snp.trailing).offset(10)
             make.top.bottom.equalTo(dateStack).offset(5)
         }
-//        datePicker.snp.makeConstraints { make in
-//            make.trailing.eq
-//        }
         genderIconContainer.snp.makeConstraints { make in
             make.leading.top.bottom.equalTo(genderStack).offset(5)
         }
@@ -227,17 +222,17 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
                 editButton.title = "Save"
                 nameTextField.isUserInteractionEnabled = true
                 dateOfBirthTextField.isUserInteractionEnabled = true
+                datePicker.isEnabled = true
+                setDatePicker()
                 genderTextField.isUserInteractionEnabled = true
-
-                print("\(String(describing: nameTextField.text))")
 
             } else {
                 editButton.title = "Edit"
                 editButton.customView?.layer.borderColor = UIColor.blue.cgColor
                 nameTextField.isUserInteractionEnabled = false
                 dateOfBirthTextField.isUserInteractionEnabled = false
+                datePicker.isEnabled = false
                 genderTextField.isUserInteractionEnabled = false
-                //genderPicker.isUserInteractionEnabled = false
                 detailPresenter?.updateUserInfo(name: nameTextField.text ?? "Unknown User", dateOfBirth: dateOfBirthTextField.text, gender: genderTextField.text ?? "Not chosen")
             }
         }
@@ -248,9 +243,25 @@ final class DetailViewController: UIViewController, DetailViewProtocol {
         formatter.dateFormat = "dd.MM.yyyy"
         dateOfBirthTextField.text = formatter.string(from: datePicker.date)
     }
+
+    private func dateFormatter(from dateString: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        if let date = formatter.date(from: dateString) {
+            return date
+        }
+        return .now
+    }
+
+    private func setDatePicker() {
+        if let currentTextDate  = dateOfBirthTextField.text {
+            datePicker.date = dateFormatter(from: currentTextDate)
+        }
+    }
 }
 
 extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -269,20 +280,6 @@ extension DetailViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension DetailViewController: UITextFieldDelegate {
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        if textField == dateOfBirthTextField {
-//            if (dateOfBirthTextField.text?.count == 2) || (dateOfBirthTextField.text?.count == 5) {
-//                        if !(string == "") {
-//                            dateOfBirthTextField.text = (dateOfBirthTextField.text)! + "-"
-//                        }
-//                    }
-//                    return !(textField.text!.count > 9 && (string.count ) > range.length)
-//                }
-//        if textField == genderTextField {
-//            return false
-//        }
-//        return true
-//    }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == genderTextField {
@@ -291,12 +288,12 @@ extension DetailViewController: UITextFieldDelegate {
             isEditing = true
         }
         return true
-        }
+    }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-            isEditing = false
+        isEditing = false
         genderPicker.isHidden = true
-        }
     }
+}
 
 
