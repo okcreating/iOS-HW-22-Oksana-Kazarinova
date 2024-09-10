@@ -15,8 +15,7 @@ protocol ModuleBuilder {
 class ModuleAssembler: ModuleBuilder {
     static func createMainModule() -> UIViewController {
         let view = MainViewController()
-        let user = User()
-        let presenter = MainViewPresenter(view: view, user: user)
+        let presenter = MainViewPresenter(view: view)
         view.mainPresenter = presenter
         return view
     }

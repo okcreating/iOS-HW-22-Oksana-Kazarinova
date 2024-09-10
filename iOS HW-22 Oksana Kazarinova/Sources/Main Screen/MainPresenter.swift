@@ -15,7 +15,7 @@ protocol MainViewProtocol: AnyObject {
 }
 
 protocol MainPresenterProtocol {
-    init(view: MainViewProtocol, user: User)
+   // init(view: MainViewProtocol, user: User)
     func addUser(name: String, dateOfBirth: String?, gender: String?)
     func countUsers() -> Int
     func getUserByIndex(at index: Int) -> User?
@@ -26,10 +26,8 @@ protocol MainPresenterProtocol {
 final class MainViewPresenter: MainPresenterProtocol {
 
     let view: MainViewProtocol
-    let user: User
-    init(view: any MainViewProtocol, user: User) {
+    init(view: any MainViewProtocol) {
         self.view = view
-        self.user = user
     }
 
     func addUser(name: String, dateOfBirth: String?, gender: String?) {
