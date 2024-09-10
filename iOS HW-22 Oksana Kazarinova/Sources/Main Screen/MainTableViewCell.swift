@@ -17,7 +17,7 @@ class MainTableViewCell: UITableViewCell {
     lazy var name: UILabel = {
         let name = UILabel()
         name.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        name.textAlignment = .center
+        name.textAlignment = .left
         return name
     }()
 
@@ -36,13 +36,15 @@ class MainTableViewCell: UITableViewCell {
     }
 
     func setupHierarchy() {
-        addSubview(name)
+        contentView.addSubview(name)
     }
 
     func setupLayout() {
         name.snp.makeConstraints { make in
             make.leading.equalTo(contentView).offset(20)
-            make.top.bottom.equalTo(contentView).offset(12)
+            make.trailing.equalTo(contentView).offset(-20)
+            make.top.equalTo(contentView).offset(12)
+            make.bottom.equalTo(contentView).offset(-12)
         }
     }
 }
