@@ -7,23 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C63588052C7B836E00FDA690 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C63588042C7B836E00FDA690 /* SnapKit */; };
+		C63A581D2C80BCF60062E7DA /* KeyBoardExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */; };
+		C63F5FD42C7FD8E80010F4FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C63F5FD32C7FD8E80010F4FC /* Kingfisher */; };
 		C65D726E2C7A631C000D6AE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */; };
 		C65D72702C7A631C000D6AE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */; };
-		C65D72722C7A631C000D6AE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72712C7A631C000D6AE0 /* ViewController.swift */; };
-		C65D72752C7A631C000D6AE0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C65D72742C7A631C000D6AE0 /* Base */; };
+		C65D72722C7A631C000D6AE0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72712C7A631C000D6AE0 /* MainViewController.swift */; };
 		C65D72772C7A631E000D6AE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C65D72762C7A631E000D6AE0 /* Assets.xcassets */; };
 		C65D727A2C7A631E000D6AE0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C65D72792C7A631E000D6AE0 /* Base */; };
+		C65D728C2C7A695D000D6AE0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C65D728A2C7A695D000D6AE0 /* Model.xcdatamodeld */; };
+		C65D728F2C7A7AAB000D6AE0 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D728D2C7A7AAB000D6AE0 /* User+CoreDataClass.swift */; };
+		C65D72902C7A7AAB000D6AE0 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D728E2C7A7AAB000D6AE0 /* User+CoreDataProperties.swift */; };
+		C65D72922C7A7C17000D6AE0 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72912C7A7C17000D6AE0 /* ModuleBuilder.swift */; };
+		C65D72982C7A7FB5000D6AE0 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72972C7A7FB5000D6AE0 /* MainTableViewCell.swift */; };
+		C65D729A2C7A80E6000D6AE0 /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D72992C7A80E6000D6AE0 /* MainPresenter.swift */; };
+		C65D729C2C7A8104000D6AE0 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D729B2C7A8104000D6AE0 /* DetailPresenter.swift */; };
+		C65D729E2C7A81F4000D6AE0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65D729D2C7A81F4000D6AE0 /* DetailViewController.swift */; };
+		C65F07392C7E097B0096DC6F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C65F07382C7E097B0096DC6F /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyBoardExtension.swift; sourceTree = "<group>"; };
 		C65D726A2C7A631C000D6AE0 /* iOS HW-22 Oksana Kazarinova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS HW-22 Oksana Kazarinova.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C65D72712C7A631C000D6AE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C65D72742C7A631C000D6AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C65D72712C7A631C000D6AE0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		C65D72762C7A631E000D6AE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C65D72792C7A631E000D6AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C65D727B2C7A631E000D6AE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C65D728B2C7A695D000D6AE0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		C65D728D2C7A7AAB000D6AE0 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C65D728E2C7A7AAB000D6AE0 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C65D72912C7A7C17000D6AE0 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		C65D72972C7A7FB5000D6AE0 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		C65D72992C7A80E6000D6AE0 /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
+		C65D729B2C7A8104000D6AE0 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		C65D729D2C7A81F4000D6AE0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C65F07382C7E097B0096DC6F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +51,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C63F5FD42C7FD8E80010F4FC /* Kingfisher in Frameworks */,
+				C63588052C7B836E00FDA690 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C63A581E2C80FEFE0062E7DA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C63A581C2C80BCF60062E7DA /* KeyBoardExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C65D72612C7A631C000D6AE0 = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +86,97 @@
 		C65D726C2C7A631C000D6AE0 /* iOS HW-22 Oksana Kazarinova */ = {
 			isa = PBXGroup;
 			children = (
-				C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */,
-				C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */,
-				C65D72712C7A631C000D6AE0 /* ViewController.swift */,
-				C65D72732C7A631C000D6AE0 /* Main.storyboard */,
-				C65D72762C7A631E000D6AE0 /* Assets.xcassets */,
-				C65D72782C7A631E000D6AE0 /* LaunchScreen.storyboard */,
-				C65D727B2C7A631E000D6AE0 /* Info.plist */,
+				C65D72832C7A667B000D6AE0 /* Sources */,
+				C65D72812C7A65C5000D6AE0 /* App */,
+				C65D72822C7A65FB000D6AE0 /* Resources */,
 			);
 			path = "iOS HW-22 Oksana Kazarinova";
+			sourceTree = "<group>";
+		};
+		C65D72812C7A65C5000D6AE0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C65D726F2C7A631C000D6AE0 /* SceneDelegate.swift */,
+				C65D726D2C7A631C000D6AE0 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C65D72822C7A65FB000D6AE0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C65D72782C7A631E000D6AE0 /* LaunchScreen.storyboard */,
+				C65D72762C7A631E000D6AE0 /* Assets.xcassets */,
+				C65D727B2C7A631E000D6AE0 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C65D72832C7A667B000D6AE0 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C65F07372C7E09080096DC6F /* CoreDataManager */,
+				C65D72892C7A6838000D6AE0 /* Module Builder */,
+				C65D72842C7A6698000D6AE0 /* Model */,
+				C65D72872C7A6711000D6AE0 /* Main Screen */,
+				C65D72882C7A6753000D6AE0 /* Detail Screen */,
+				C63A581E2C80FEFE0062E7DA /* Extensions */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		C65D72842C7A6698000D6AE0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C65D72932C7A7C42000D6AE0 /* Entity */,
+				C65D728A2C7A695D000D6AE0 /* Model.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C65D72872C7A6711000D6AE0 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				C65D72712C7A631C000D6AE0 /* MainViewController.swift */,
+				C65D72972C7A7FB5000D6AE0 /* MainTableViewCell.swift */,
+				C65D72992C7A80E6000D6AE0 /* MainPresenter.swift */,
+			);
+			path = "Main Screen";
+			sourceTree = "<group>";
+		};
+		C65D72882C7A6753000D6AE0 /* Detail Screen */ = {
+			isa = PBXGroup;
+			children = (
+				C65D729D2C7A81F4000D6AE0 /* DetailViewController.swift */,
+				C65D729B2C7A8104000D6AE0 /* DetailPresenter.swift */,
+			);
+			path = "Detail Screen";
+			sourceTree = "<group>";
+		};
+		C65D72892C7A6838000D6AE0 /* Module Builder */ = {
+			isa = PBXGroup;
+			children = (
+				C65D72912C7A7C17000D6AE0 /* ModuleBuilder.swift */,
+			);
+			path = "Module Builder";
+			sourceTree = "<group>";
+		};
+		C65D72932C7A7C42000D6AE0 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C65D728D2C7A7AAB000D6AE0 /* User+CoreDataClass.swift */,
+				C65D728E2C7A7AAB000D6AE0 /* User+CoreDataProperties.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		C65F07372C7E09080096DC6F /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				C65F07382C7E097B0096DC6F /* CoreDataManager.swift */,
+			);
+			name = CoreDataManager;
+			path = "Module Builder/CoreDataManager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +195,10 @@
 			dependencies = (
 			);
 			name = "iOS HW-22 Oksana Kazarinova";
+			packageProductDependencies = (
+				C63588042C7B836E00FDA690 /* SnapKit */,
+				C63F5FD32C7FD8E80010F4FC /* Kingfisher */,
+			);
 			productName = "iOS HW-22 Oksana Kazarinova";
 			productReference = C65D726A2C7A631C000D6AE0 /* iOS HW-22 Oksana Kazarinova.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +227,10 @@
 				Base,
 			);
 			mainGroup = C65D72612C7A631C000D6AE0;
+			packageReferences = (
+				C63588032C7B836E00FDA690 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C63F5FD22C7FD8E80010F4FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = C65D726B2C7A631C000D6AE0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +247,6 @@
 			files = (
 				C65D72772C7A631E000D6AE0 /* Assets.xcassets in Resources */,
 				C65D727A2C7A631E000D6AE0 /* Base in Resources */,
-				C65D72752C7A631C000D6AE0 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +257,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C65D72722C7A631C000D6AE0 /* ViewController.swift in Sources */,
+				C63A581D2C80BCF60062E7DA /* KeyBoardExtension.swift in Sources */,
+				C65D72722C7A631C000D6AE0 /* MainViewController.swift in Sources */,
+				C65D72982C7A7FB5000D6AE0 /* MainTableViewCell.swift in Sources */,
 				C65D726E2C7A631C000D6AE0 /* AppDelegate.swift in Sources */,
+				C65D729E2C7A81F4000D6AE0 /* DetailViewController.swift in Sources */,
+				C65D728F2C7A7AAB000D6AE0 /* User+CoreDataClass.swift in Sources */,
+				C65D729C2C7A8104000D6AE0 /* DetailPresenter.swift in Sources */,
+				C65D72902C7A7AAB000D6AE0 /* User+CoreDataProperties.swift in Sources */,
+				C65F07392C7E097B0096DC6F /* CoreDataManager.swift in Sources */,
+				C65D729A2C7A80E6000D6AE0 /* MainPresenter.swift in Sources */,
+				C65D72922C7A7C17000D6AE0 /* ModuleBuilder.swift in Sources */,
 				C65D72702C7A631C000D6AE0 /* SceneDelegate.swift in Sources */,
+				C65D728C2C7A695D000D6AE0 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C65D72732C7A631C000D6AE0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C65D72742C7A631C000D6AE0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C65D72782C7A631E000D6AE0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,12 +414,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS HW-22 Oksana Kazarinova/Info.plist";
+				INFOPLIST_FILE = "iOS HW-22 Oksana Kazarinova/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -306,6 +426,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "okcreating.iOS-HW-22-Oksana-Kazarinova";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -320,12 +443,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS HW-22 Oksana Kazarinova/Info.plist";
+				INFOPLIST_FILE = "iOS HW-22 Oksana Kazarinova/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,6 +455,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "okcreating.iOS-HW-22-Oksana-Kazarinova";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,6 +486,52 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C63588032C7B836E00FDA690 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		C63F5FD22C7FD8E80010F4FC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C63588042C7B836E00FDA690 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C63588032C7B836E00FDA690 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		C63F5FD32C7FD8E80010F4FC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C63F5FD22C7FD8E80010F4FC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		C65D728A2C7A695D000D6AE0 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C65D728B2C7A695D000D6AE0 /* Model.xcdatamodel */,
+			);
+			currentVersion = C65D728B2C7A695D000D6AE0 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = "/Users/okcreating/Documents/iOS HW-22 Oksana Kazarinova/iOS HW-22 Oksana Kazarinova/Sources/Model/Model.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C65D72622C7A631C000D6AE0 /* Project object */;
 }
